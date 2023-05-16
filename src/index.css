@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.h1-mobile {
+    @apply font-bold font-poppins text-3xl text-black
+}
+
+.h2-mobile {
+    @apply font-medium font-poppins text-2xl text-black
+}
+
+.h3-mobile {
+    @apply font-semibold font-poppins text-2xl text-black
+}
+
+.h4-mobile {
+    @apply font-medium font-poppins text-xl text-black
+}
+
+.text {
+    @apply font-normal font-poppins text-sm text-black
+}
+
+.body {
+    @apply font-normal font-poppins text-xs text-black
+}
