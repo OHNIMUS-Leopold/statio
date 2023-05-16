@@ -3,6 +3,6 @@
 
 <template>
   <div>
-    <h1>This is an home page</h1>
+    <h1 class="font-poppins">This is an home page</h1>
   </div>
 </template>
