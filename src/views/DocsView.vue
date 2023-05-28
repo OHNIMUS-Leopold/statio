@@ -1,8 +1,11 @@
 <script setup lang="ts">
-
+import HeaderComp from '@/components/header.vue';
 </script>
 
 <template>
+    
+    <HeaderComp />
+    
     <div>
         <form
             class="mx-auto w-full max-w-sm bg-white shadow rounded-md p-5 space-y-3 text-sm"
@@ -55,7 +58,7 @@
 
 
 
-<script>
+<script lang="ts">
 import CurrencyAPI from '@everapi/currencyapi-js';
 
 export default {

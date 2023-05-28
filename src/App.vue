@@ -5,22 +5,12 @@ import DocsIcon from '@/components/icons/docsIcon.vue';
 import MapIcon from '@/components/icons/mapIcon.vue';
 import TranslateIcon from '@/components/icons/translateIcon.vue';
 import MessagesIcon from '@/components/icons/messagesIcon.vue';
-import userFoto from '@/components/userFoto.vue';
 
 const route = useRoute(); // Récupère le chemin de la page active
 </script>
 
 <template>
 
-  <header>
-    <div class="flex px-5 pt-12 justify-between items-center">
-      <p class="logo">
-        Statio
-      </p>
-      <userFoto imgPath="./src/assets/img/template/user.png" />
-    </div>
-  </header>
-  
   <RouterView />
 
   <footer>
