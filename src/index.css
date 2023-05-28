@@ -26,3 +26,13 @@
 .body {
     @apply font-normal font-poppins text-xs text-black
 }
+
+.logo {
+    font-size: 32px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    background: -webkit-linear-gradient(-20deg, #42558e, #6fa8bf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
