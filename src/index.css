@@ -39,3 +39,7 @@
 body {
     background-color: #fbfbfb;
 }
+
+.degrade {
+    background: linear-gradient(-20deg, #42558e, #6fa8bf);
+}

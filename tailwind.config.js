@@ -28,6 +28,7 @@ module.exports = {
       },
       boxShadow: {
         'drop2': '0 10px 48px rgba(30, 28, 46, 0.08)',
+        'drop-shadow' : '0px 24px 48px rgba(30, 28, 46, 0.08)',
       }
     },
   },
