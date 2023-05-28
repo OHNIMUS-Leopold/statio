@@ -25,6 +25,9 @@ module.exports = {
 
       fontFamily: {
         poppins: "Poppins, sans-serif",
+      },
+      boxShadow: {
+        'drop2': '0 10px 48px rgba(30, 28, 46, 0.08)',
       }
     },
   },
