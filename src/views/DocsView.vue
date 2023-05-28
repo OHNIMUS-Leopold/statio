@@ -77,6 +77,42 @@ import HeaderComp from '@/components/header.vue';
 
         
     </div>
+
+    <div class="container">
+        <div class="search-box">
+        
+        <input type="" placeholder="Enter your location" v-model="city">
+        <button class="" @click="searchWeather">le bouton</button>
+        </div>
+
+        <div class="not-found" v-show="error404">
+        <img src="/src/assets/img/weather/404.png">
+        <p>Oops! Invalid location :/</p>
+        </div>
+
+        <div class="weather-box" v-show="!error404">
+        <img :src="weatherImage">
+        <p class="temperature">{{ weatherTemperature }}<span>°C</span></p>
+        <p class="description">{{ weatherDescription }}</p>
+        </div>
+
+        <div class="weather-details" v-show="!error404">
+        <div class="humidity">
+            
+            <div class="">
+            <span>{{ humidity }}%</span>
+            <p>Humidity</p>
+            </div>
+        </div>
+        <div class="wind">
+            
+            <div class="">
+            <span>{{ windSpeed }}Km/h</span>
+            <p>Wind Speed</p>
+            </div>
+        </div>
+        </div>
+    </div>
 </template>
 
 
@@ -94,10 +130,50 @@ export default {
                 currencies: 'USD'
             },
             results: null,
-            currencyApi: new CurrencyAPI('API-KEY'),
+            currencyApi: new CurrencyAPI('CURRENCY-API'),
             multiplier: 1,
+
+            city: '',
+            weatherData: null,
+            error404: false,
         }
     },
+    computed: {
+    weatherImage(): string {
+      if (!this.weatherData) return '';
+      switch (this.weatherData.weather[0].main) {
+        case 'Clear':
+          return '/src/assets/img/weather/clear.png';
+        case 'Rain':
+          return '/src/assets/img/weather/rain.png';
+        case 'Snow':
+          return '/src/assets/img/weather/snow.png';
+        case 'Clouds':
+          return '/src/assets/img/weather/cloud.png';
+        case 'Haze':
+          return '/src/assets/img/weather/mist.png';
+        default:
+          return '';
+      }
+    },
+    weatherTemperature(): string {
+      if (!this.weatherData) return '';
+      return `${parseInt(this.weatherData.main.temp)}`;
+    },
+    weatherDescription(): string {
+      if (!this.weatherData) return '';
+      return this.weatherData.weather[0].description;
+    },
+    humidity(): string {
+      if (!this.weatherData) return '';
+      return `${this.weatherData.main.humidity}`;
+    },
+    windSpeed(): string {
+      if (!this.weatherData) return '';
+      return `${parseInt(this.weatherData.wind.speed)}`;
+    }
+  },
+  
     methods: {
         submit () {
             this.results = null;
@@ -115,6 +191,21 @@ export default {
             return value;
         }
         },
+        searchWeather(): void {
+      const APIKey = 'WEATHER-API';
+      if (this.city === '') return;
+
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=${APIKey}`)
+        .then(response => response.json())
+        .then(json => {
+          if (json.cod === '404') {
+            this.error404 = true;
+            return;
+          }
+
+          this.weatherData = json;
+          this.error404 = false;
+        });
     }
-}
+    },};
 </script>
