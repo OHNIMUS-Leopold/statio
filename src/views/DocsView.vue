@@ -29,7 +29,7 @@ import HeaderComp from '@/components/header.vue';
             <div class="flex mt-4 ml-3 mr-7 items-center justify-between">
                 <div class="">
                     <label for="multiplier" class="hidden">Multiplicateur :</label>
-                    <input v-model="multiplier" type="number" class="w-48 text-blue font-poppins font-normal text-5xl" />
+                    <input v-model="multiplier" type="number" class="w-48 text-blue font-poppins font-normal text-5xl outline-none" />
                 </div>
                 <div>
                     <p class="text">{{ params.base_currency }}</p>
