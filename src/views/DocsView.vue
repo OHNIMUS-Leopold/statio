@@ -113,6 +113,18 @@ import HeaderComp from '@/components/header.vue';
         </div>
         </div>
     </div>
+
+    <!-- <div :key="index" v-for="(unpays, index) in pays" >
+        <img :src="unpays.flags.png" />
+    </div> -->
+
+    <div v-for="(unpays, index) in pays" :key="index">
+        <!-- <div v-if="index===90">
+            <img :src="unpays.flags.png" />
+        </div> -->
+        {{ unpays.name }}
+    </div>
+    
 </template>
 
 
@@ -120,6 +132,7 @@ import HeaderComp from '@/components/header.vue';
 
 <script lang="ts">
 import CurrencyAPI from '@everapi/currencyapi-js';
+import axios from 'axios';
 
 export default {
     name: 'CurrencyConverter',
@@ -136,8 +149,18 @@ export default {
             city: '',
             weatherData: null,
             error404: false,
+
+            pays: null,
         }
     },
+    mounted() {
+        axios
+            .get('https://restcountries.com/v3.1/all')
+            .then((reponse) => {
+            this.pays = reponse.data;
+            console.log(this.pays);
+            });
+        },
     computed: {
     weatherImage(): string {
       if (!this.weatherData) return '';
