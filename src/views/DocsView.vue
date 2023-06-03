@@ -7,7 +7,7 @@ import HeaderComp from '@/components/header.vue';
     <HeaderComp />
     
     <div class="bg-blanc mt-7 py-4 mx-5 px-4 shadow-drop2 rounded-xl">
-        <h1 class="text-center h4-mobile">
+        <h1 class="text-center vingt-med">
             Convertisseur de devise
         </h1>
         <hr class="border-lightgray mt-2 mb-4">
@@ -32,7 +32,7 @@ import HeaderComp from '@/components/header.vue';
                     <input v-model="multiplier" type="number" class="w-48 text-blue font-poppins font-normal text-5xl outline-none" />
                 </div>
                 <div>
-                    <p class="text">{{ params.base_currency }}</p>
+                    <p class="quatorze-norm">{{ params.base_currency }}</p>
                 </div>
             </div>
             <div class="text-center">
@@ -59,7 +59,7 @@ import HeaderComp from '@/components/header.vue';
                 class="flex mt-4 ml-3 mr-7 items-center justify-between"
             >
             <p class="pt-2 w-48 text-blue font-poppins font-normal text-5xl">{{ multiplyResult(result.value) }}</p>
-            <p class="pt-2 text">{{ result.code }}</p>
+            <p class="pt-2 quatorze-norm">{{ result.code }}</p>
                 
             </div>
         </form>
