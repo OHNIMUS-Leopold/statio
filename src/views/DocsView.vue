@@ -18,12 +18,18 @@ import HeaderComp from '@/components/header.vue';
             <div class="">
                 <label for="base_currency_input" class="hidden">Base currency:</label>
                 <select v-model="params.base_currency" class="text-darkgray focus:outline-darkblue focus:text-darkblue font-poppins font-semibold text-base py-2 px-3 outline outline-2 rounded-xl" name="currency_choice" id="currency_choice">
+                    <option value="EUR">Allemagne</option>
+                    <option value="GBP">Angleterre</option>
                     <option value="CAD">Canada</option>
-                    <option value="GBP">England</option>
+                    <option value="CNY">Chine</option>
+                    <option value="KRW">Corée du Sud</option>
+                    <option value="EUR">Espagne</option>
+                    <option value="USD">États-Unis</option>
                     <option value="EUR">France</option>
-                    <option value="JPY">Japan</option>
-                    <option value="KRW">South Korea</option>
-                    <option value="USD">United States</option>
+                    <option value="EUR">Grèce</option>
+                    <option value="EUR">Italie</option>
+                    <option value="JPY">Japon</option>
+                    <option value="MAD">Maroc</option>
                 </select>
             </div>
             <div class="flex mt-4 ml-3 mr-7 items-center justify-between">
@@ -45,12 +51,18 @@ import HeaderComp from '@/components/header.vue';
             <div class="">
                 <label for="currencies" class="hidden">Target currencies:</label>
                 <select v-model="params.currencies" class="text-darkgray focus:outline-darkblue focus:text-darkblue font-poppins font-semibold text-base py-2 px-3 outline outline-2 rounded-xl" name="currencies_choice" id="currencies_choice">
+                    <option value="EUR">Allemagne</option>
+                    <option value="GBP">Angleterre</option>
                     <option value="CAD">Canada</option>
-                    <option value="GBP">England</option>
+                    <option value="CNY">Chine</option>
+                    <option value="KRW">Corée du Sud</option>
+                    <option value="EUR">Espagne</option>
+                    <option value="USD">États-Unis</option>
                     <option value="EUR">France</option>
-                    <option value="JPY">Japan</option>
-                    <option value="KRW">South Korea</option>
-                    <option value="USD">United States</option>
+                    <option value="EUR">Grèce</option>
+                    <option value="EUR">Italie</option>
+                    <option value="JPY">Japon</option>
+                    <option value="MAD">Maroc</option>
                 </select>
             </div>
             <div
@@ -139,7 +151,7 @@ export default {
     data () {
         return {
             params: {
-                base_currency: 'EUR',
+                base_currency: 'JPY',
                 currencies: 'USD'
             },
             results: null,
