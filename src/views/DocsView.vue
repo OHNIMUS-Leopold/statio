@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeaderComp from '@/components/header.vue';
 import FooterComp from '@/components/footer.vue';
+import searchIcon from '@/components/icons/searchIcon.vue';
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import FooterComp from '@/components/footer.vue';
     <HeaderComp />
     
     <div class="bg-blanc mt-7 py-4 mx-5 px-4 shadow-drop2 rounded-xl">
-        <h1 class="text-center vingt-med">
+        <h1 class="text-center vingt-med text-black">
             Convertisseur de devise
         </h1>
         <hr class="border-lightgray mt-2 mb-4">
@@ -39,7 +40,7 @@ import FooterComp from '@/components/footer.vue';
                     <input v-model="multiplier" type="number" class="w-48 text-blue font-poppins font-normal text-5xl outline-none" />
                 </div>
                 <div>
-                    <p class="quatorze-norm">{{ params.base_currency }}</p>
+                    <p class="quatorze-norm text-black">{{ params.base_currency }}</p>
                 </div>
             </div>
             <div class="text-center">
@@ -72,8 +73,12 @@ import FooterComp from '@/components/footer.vue';
                 class="flex mt-4 ml-3 mr-7 items-center justify-between"
             >
             <p class="pt-2 w-48 text-blue font-poppins font-normal text-5xl">{{ multiplyResult(result.value) }}</p>
-            <p class="pt-2 quatorze-norm">{{ result.code }}</p>
-                
+            <p class="pt-2 quatorze-norm text-black">{{ result.code }}</p>
+            </div>
+            <div v-for="result of results"
+                :key="result.code" class="text-center">
+                <hr class="mt-5 border-0 bg-lightgray h-[1px]">
+                <p class="quatorze-norm text-black mt-3">1 {{ params.base_currency }} = {{ result.value }} {{ result.code }}</p>
             </div>
         </form>
                 
@@ -91,11 +96,12 @@ import FooterComp from '@/components/footer.vue';
         
     </div>
 
-    <div class="container">
-        <div class="search-box">
-        
-        <input type="" placeholder="Enter your location" v-model="city">
-        <button class="" @click="searchWeather">le bouton</button>
+    <div class="mb-96">
+        <div class="flex items-center">
+            <input type="" placeholder="Entrer la ville ou le pays" v-model="city">
+            <button class="" @click="searchWeather">
+                <searchIcon />
+            </button>
         </div>
 
         <div class="not-found" v-show="error404">
@@ -106,10 +112,10 @@ import FooterComp from '@/components/footer.vue';
         <div class="weather-box" v-show="!error404">
         <img :src="weatherImage">
         <p class="temperature">{{ weatherTemperature }}<span>°C</span></p>
-        <p class="description">{{ weatherDescription }}</p>
+        <!-- <p class="description">{{ weatherDescription }}</p> -->
         </div>
 
-        <div class="weather-details" v-show="!error404">
+        <!-- <div class="weather-details" v-show="!error404">
         <div class="humidity">
             
             <div class="">
@@ -124,19 +130,19 @@ import FooterComp from '@/components/footer.vue';
             <p>Wind Speed</p>
             </div>
         </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- <div :key="index" v-for="(unpays, index) in pays" >
         <img :src="unpays.flags.png" />
     </div> -->
 
-    <div v-for="(unpays, index) in pays" :key="index">
-        <!-- <div v-if="index===90">
+    <!-- <div v-for="(unpays, index) in pays" :key="index">
+        <div v-if="index===90">
             <img :src="unpays.flags.png" />
-        </div> -->
+        </div>
         {{ unpays.name }}
-    </div>
+    </div> -->
 
 
     <FooterComp />
@@ -231,7 +237,7 @@ export default {
         }
         },
         searchWeather(): void {
-      const APIKey = 'WEATHER-API';
+      const APIKey = 'b2b671f8d17baa44517a1757407646d8';
       if (this.city === '') return;
 
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=${APIKey}`)
