@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import HeaderComp from '@/components/header.vue';
+
 </script>
 
 <template>
-    <HeaderComp />
+    <div>
+        <img class="w-full h-full" src="../assets/img/template/wallpaperlanding.png" alt="">
 
-    <div></div>
+    </div>
+
+    
 </template>

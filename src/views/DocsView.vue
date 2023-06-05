@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HeaderComp from '@/components/header.vue';
+import FooterComp from '@/components/footer.vue';
 </script>
 
 <template>
@@ -136,6 +137,9 @@ import HeaderComp from '@/components/header.vue';
         </div> -->
         {{ unpays.name }}
     </div>
+
+
+    <FooterComp />
     
 </template>
 

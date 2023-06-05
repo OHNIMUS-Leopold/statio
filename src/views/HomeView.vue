@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HeaderComp from '@/components/header.vue';
+import FooterComp from '@/components/footer.vue';
 </script>
 
 <template>
@@ -32,6 +33,9 @@ import HeaderComp from '@/components/header.vue';
        </div>
        </form>
      </div>
+
+     <FooterComp />
+
    </template>
    
    <script lang="ts">

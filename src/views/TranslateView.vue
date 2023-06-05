@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import FooterComp from '@/components/footer.vue';
+</script>
+
+
 <template>
     <div>
       <h1>Google Traduction</h1>
@@ -24,6 +29,10 @@
         <p>{{ translatedText }}</p>
       </div>
     </div>
+
+
+
+    <FooterComp />
   </template>
   
   <script lang="ts">
