@@ -8,7 +8,7 @@ import userFoto from '@/components/userFoto.vue';
             <p class="logo">
                 Statio
             </p>
-            <userFoto imgPath="./src/assets/img/template/user.png" />
+            <userFoto />
         </div>
     </header>
 </template>

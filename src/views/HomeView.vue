@@ -4,8 +4,66 @@ import FooterComp from '@/components/footer.vue';
 </script>
 
 <template>
+    <HeaderComp />
+
+    <main>
+        
+    </main>
+
+
     <FooterComp />
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- <template>
     <HeaderComp />
