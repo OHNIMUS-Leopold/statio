@@ -14,7 +14,7 @@ const route = useRoute(); // Récupère le chemin de la page active
     <div class="fixed bottom-0 w-full z-10 bg-darkblue px-7 py-6 rounded-t-3xl">
       <nav class="flex justify-between">
         <li class="list-none">
-          <RouterLink to="/home" :class="route.path !== '/' ? 'opacity-60' : 'opacity-100'">
+          <RouterLink to="/home" :class="route.path !== '/home' ? 'opacity-60' : 'opacity-100'">
             <homeIcon />
           </RouterLink>
         </li>

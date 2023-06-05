@@ -4,7 +4,7 @@ import userFoto from '@/components/userFoto.vue';
 
 <template>
     <header>
-        <div class="flex px-5 pt-12 justify-between items-center">
+        <div class="flex px-5 pt-12 justify-between items-center bg-blancbody">
             <p class="logo">
                 Statio
             </p>

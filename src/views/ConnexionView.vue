@@ -21,11 +21,11 @@ import cnxButton from '@/components/cnxButton.vue';
             <form @submit.prevent="onCnx()" class="flex flex-col">
                 <div class="flex items-center bg-gray rounded-2xl py-3 px-4 space-x-5">
                     <mailIcon class="h-6 w-6" />
-                    <input class="bg-gray outline-none font-poppins text-base font-medium text-black" type="email" id="email" name="email" placeholder="E-mail" v-model="user.email" required>
+                    <input class="w-[70%] bg-gray outline-none font-poppins text-base font-medium text-black" type="email" id="email" name="email" placeholder="E-mail" v-model="user.email" required>
                 </div>
                 <div class="mt-10 flex items-center bg-gray rounded-2xl py-3 px-4 space-x-5">
                     <lockIcon class="h-6 w-6" />
-                    <input class="bg-gray outline-none font-poppins text-base font-medium text-black" id="password" type="password" name="password" placeholder="Mot de passe" v-model="user.password" required>
+                    <input class="w-[70%] bg-gray outline-none font-poppins text-base font-medium text-black" id="password" type="password" name="password" placeholder="Mot de passe" v-model="user.password" required>
                     <button type="button" @click="togglePasswordVisibility()">
                         <eyeslashIcon class="h-6 w-6" />
                     </button>
