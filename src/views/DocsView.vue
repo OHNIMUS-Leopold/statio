@@ -2,6 +2,7 @@
 import HeaderComp from '@/components/header.vue';
 import FooterComp from '@/components/footer.vue';
 import searchIcon from '@/components/icons/searchIcon.vue';
+import locationIcon from '@/components/icons/locationIcon.vue';
 </script>
 
 <template>
@@ -96,22 +97,29 @@ import searchIcon from '@/components/icons/searchIcon.vue';
         
     </div>
 
-    <div class="mb-96">
-        <div class="flex items-center">
-            <input type="" placeholder="Entrer la ville ou le pays" v-model="city">
-            <button class="" @click="searchWeather">
-                <searchIcon />
-            </button>
+    <div class="mt-10 pt-4 mb-96 bg-blanc rounded-xl mx-5 shadow-drop2">
+        <div class="">
+            <h2 class="text-center font-medium font-poppins text-lg text-black">Météo</h2>
+            <hr class="mt-3 mb-4 border-0 bg-lightgray h-[1px]">
+            <div class="flex justify-between items-center mx-5">
+                <div class="flex items-center justify-center space-x-2">
+                    <locationIcon class="h-5 w-5" />
+                    <input class="outline-none text-darkgray font-normal font-poppins text-xl " type="" placeholder="Entrer la ville ou le pays" v-model="city">
+                </div>
+                <button class="" @click="searchWeather">
+                    <searchIcon class="h-5 w-5" />
+                </button>
+            </div>
         </div>
 
-        <div class="not-found" v-show="error404">
-        <img src="/src/assets/img/weather/404.png">
-        <p>Oops! Invalid location :/</p>
+        <div class="" v-show="error404">
+        <img class="mx-auto my-8" src="/src/assets/img/weather/404.png">
+        <p class="text-center vingt-quatre-semi text-black pb-12">Le lieu est invalide</p>
         </div>
 
-        <div class="weather-box" v-show="!error404">
-        <img :src="weatherImage">
-        <p class="temperature">{{ weatherTemperature }}<span>°C</span></p>
+        <div class="px-16" v-show="!error404">
+        <img class="mx-auto mb-6" :src="weatherImage">
+        <p class="text-center vingt-quatre-semi text-black pb-12">{{ weatherTemperature }}°C</p>
         <!-- <p class="description">{{ weatherDescription }}</p> -->
         </div>
 
@@ -180,7 +188,7 @@ export default {
             .get('https://restcountries.com/v3.1/all')
             .then((reponse) => {
             this.pays = reponse.data;
-            console.log(this.pays);
+            // console.log(this.pays);
             });
         },
     computed: {
