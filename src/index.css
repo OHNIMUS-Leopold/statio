@@ -4,11 +4,11 @@
 
 
 .trente-bold {
-    @apply font-bold font-poppins text-3xl text-black
+    @apply font-bold font-poppins text-3xl 
 }
 
 .vingt-quatre-med {
-    @apply font-medium font-poppins text-2xl text-black
+    @apply font-medium font-poppins text-2xl 
 }
 
 .vingt-quatre-semi {
@@ -16,15 +16,15 @@
 }
 
 .vingt-med {
-    @apply font-medium font-poppins text-xl text-black
+    @apply font-medium font-poppins text-xl 
 }
 
 .quatorze-norm {
-    @apply font-normal font-poppins text-sm text-black
+    @apply font-normal font-poppins text-sm
 }
 
 .douze-norm {
-    @apply font-normal font-poppins text-xs text-black
+    @apply font-normal font-poppins text-xs 
 }
 
 .logo {
@@ -36,14 +36,29 @@
     -webkit-text-fill-color: transparent;
 }
 
-.fond {
-    background: -webkit-linear-gradient(-20deg, #42558e, #6fa8bf);
-}
-
 body {
     background-color: #fbfbfb;
 }
 
 .degrade {
     background: linear-gradient(-20deg, #42558e, #6fa8bf);
+}
+
+.degrade-clair {
+    background: linear-gradient(-20deg, rgba(88,115,194,1) 0%, rgba(111,168,191,1) 100%);
+}
+
+.bg-image {
+    background-image: url('./assets/img/template/wallpaperlanding.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+}
+
+.bg-cnx {
+    background-image: url('./assets/img/fondcnx.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

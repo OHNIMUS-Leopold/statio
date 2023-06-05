@@ -4,6 +4,10 @@ import FooterComp from '@/components/footer.vue';
 </script>
 
 <template>
+    <FooterComp />
+</template>
+
+<!-- <template>
     <HeaderComp />
 
 
@@ -16,7 +20,7 @@ import FooterComp from '@/components/footer.vue';
    
          <input style="filter:drop-shadow(0px 10px 10px gray)"  id="password" type="password" name="password" placeholder="Mot de passe" v-model="user.password" required>
    
-         <!--<RouterLink to="/profil" class="contents">--><input type="submit" value="SE CONNECTER"  ><!--</RouterLink>-->
+         <input type="submit" value="SE CONNECTER">
        
        <div class="flex justify-center">
          <p class="text-white font-Poppins font-normal text-[15px] leading-[26px] tracking-normal">Pas de compte ? Commandez votre billet et inscrivez-vous</p>
@@ -36,9 +40,9 @@ import FooterComp from '@/components/footer.vue';
 
      <FooterComp />
 
-   </template>
+   </template> -->
    
-   <script lang="ts">
+   <!-- <script lang="ts">
    
    
    
@@ -120,4 +124,4 @@ import FooterComp from '@/components/footer.vue';
        }
    
    
-   </script>
+   </script> -->
