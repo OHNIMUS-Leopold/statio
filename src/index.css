@@ -12,7 +12,7 @@
 }
 
 .vingt-quatre-semi {
-    @apply font-semibold font-poppins text-2xl text-black
+    @apply font-semibold font-poppins text-2xl 
 }
 
 .vingt-med {
@@ -34,6 +34,10 @@
     background: -webkit-linear-gradient(-20deg, #42558e, #6fa8bf);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.fond {
+    background: -webkit-linear-gradient(-20deg, #42558e, #6fa8bf);
 }
 
 body {
