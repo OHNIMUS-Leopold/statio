@@ -22,6 +22,9 @@ const LesActivitesDeLondres:ActiviteResponse[] =  ActivitesLondres.expand['activ
 const TransportsParis = await allTransportsByVilleId('4z5kd1ocz8z0kc1')
 const LesTransportsDeParis:TransportResponse[] =  TransportsParis.expand['transport']
 
+const TransportsLondres = await allTransportsByVilleId('bb1fa1srm8wu67w')
+const LesTransportsDeLondres:TransportResponse[] =  TransportsLondres.expand['transport']
+
 </script>
 
 <template>
@@ -62,6 +65,10 @@ const LesTransportsDeParis:TransportResponse[] =  TransportsParis.expand['transp
                 <h2 class="seize-norm text-center text-black mb-5">Les activités sur Londres</h2>
                 <div class="grid grid-cols-2 gap-[10px]">
                     <previewActivite v-for="activiteL in LesActivitesDeLondres" :key="activiteL.id" v-bind="{ ...activiteL}" />
+                </div>
+                <h2 class="seize-norm text-center text-black mb-5 mt-9">Les transports sur Londres</h2>
+                <div class="flex flex-col gap-[10px]">
+                    <previewTransport v-for="transport in LesTransportsDeLondres" :key="transport.id" v-bind="{ ...transport}" />
                 </div>
             </div>
         </div>

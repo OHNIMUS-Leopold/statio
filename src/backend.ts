@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-import type { ActiviteResponse, VilleResponse } from './pocketbase-types';
+import type { ActiviteResponse, VilleResponse, TransportResponse } from './pocketbase-types';
 export const pb = new PocketBase('http://127.0.0.1:8090');
 
 
@@ -16,6 +16,11 @@ export async function allVillesById(id : string) {
 export async function allActivitesById(id : string) {
     const activite = await pb.collection('activite').getOne<ActiviteResponse>(id);
     return activite;
+}
+
+export async function allTransportsById(id : string) {
+    const transport = await pb.collection('transport').getOne<TransportResponse>(id);
+    return transport;
 }
 
 export async function allTransportsByVilleId(id : string) {

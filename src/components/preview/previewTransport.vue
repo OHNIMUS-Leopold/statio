@@ -22,7 +22,7 @@ const urlImg0 = img0 ? pb.getFileUrl(props, img0, { thumb: '100x250' }) : '/imag
             <h3 class="ml-2 mr-4 mt-1 font-semibold text-black font-poppins text-sm">{{ nom }}</h3>
         </div>
         <div>
-            <RouterLink to="#" class="grid justify-items-center font-poppins text-[10px] font-semibold text-blanc bg-blue rounded-3xl py-2 px-3">
+            <RouterLink :to="`/transportById/${ id }`" class="grid justify-items-center font-poppins text-[10px] font-semibold text-blanc bg-blue rounded-3xl py-2 px-3">
                 Voir plus
             </RouterLink>
         </div>
