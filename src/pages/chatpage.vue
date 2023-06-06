@@ -4,6 +4,7 @@ import FooterComp from '@/components/footer.vue';
 import cnxButton from '@/components/cnxButton.vue';
 import newmessageIcon from '@/components/icons/newmessageIcon.vue';
 import trashIcon from '@/components/icons/trashIcon.vue'
+import sendIcon from '@/components/icons/sendIcon.vue';
 </script>
 
 <template>
@@ -85,14 +86,14 @@ import trashIcon from '@/components/icons/trashIcon.vue'
                         <p class="mt-5">Aucun fil de discussion avec {{userSelected.login}}</p>
                     </div>
                     <div v-if="discussion != null">
-                        <div class="flex mb-3 items-end object-center justify-center">
-                            <textarea class="bg-Gris_Clair rounded-xl px-4 py-2" rows="3"
+                        <div class="flex my-3 mx-5 justify-center items-center">
+                            <textarea class="font-poppins font-normal text-black text-base bg-blanc border-black border-[1px] outline-blue rounded-xl px-4 py-2 w-full" 
                                 placeholder="Message"
                                 v-model="message"
                             ></textarea>
                             <div class="input-group-prepend ">
                                 <button class="ml-2" @click="sendMsg()">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--fluent" width="23" height="23" preserveAspectRatio="xMidYMid meet" viewBox="0 0 28 28"><path fill="currentColor" d="M3.79 2.773L24.86 12.85a1.25 1.25 0 0 1 0 2.256L3.79 25.183a1.25 1.25 0 0 1-1.746-1.456l2.108-7.728a.5.5 0 0 1 .415-.364l10.21-1.387a.25.25 0 0 0 .195-.15l.018-.062a.25.25 0 0 0-.157-.268l-.055-.015l-10.2-1.387a.5.5 0 0 1-.414-.364L2.044 4.23A1.25 1.25 0 0 1 3.79 2.773Z"></path></svg>
+                                    <sendIcon />
                                 </button>
                             </div>
                         </div>
@@ -110,8 +111,8 @@ import trashIcon from '@/components/icons/trashIcon.vue'
                                         </div>
                                         <div class="col-8 text-center mb-1 mx-2 grid grid-cols-2">
                                             <div></div>
-                                            <div class="bg-red_message rounded-xl p-3 my-3">
-                                                <p>{{msg.contenu}}</p>
+                                            <div class="bg-lightgreen rounded-xl p-3 my-3">
+                                                <p class="font-poppins font-normal text-black text-base">{{msg.contenu}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -126,8 +127,8 @@ import trashIcon from '@/components/icons/trashIcon.vue'
                                                 </div>
                                         </div>
                                         <div class="col-8 text-center mb-1 mx-2 grid grid-cols-2">
-                                            <div class="w-70 bg-grey_message rounded-xl col-start-1 p-3  my-3" >
-                                                <p>{{msg.contenu}}</p>
+                                            <div class="w-70 bg-lightgray rounded-xl col-start-1 p-3  my-3" >
+                                                <p class="font-poppins font-normal text-black text-base">{{msg.contenu}}</p>
                                             </div>
                                         </div>
                                     </div>
