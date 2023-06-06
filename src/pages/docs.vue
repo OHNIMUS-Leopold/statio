@@ -3,6 +3,13 @@ import HeaderComp from '@/components/header.vue';
 import FooterComp from '@/components/footer.vue';
 import searchIcon from '@/components/icons/searchIcon.vue';
 import locationIcon from '@/components/icons/locationIcon.vue';
+import tickIcon from '@/components/icons/tickIcon.vue';
+import dangerIcon from '@/components/icons/dangerIcon.vue';
+import securityIcon from '@/components/icons/securityIcon.vue';
+import peopleIcon from '@/components/icons/peopleIcon.vue';
+import { infoID } from '@/backend';
+
+const uneInfoParis = await infoID('td54q4ij9nm0yjk')
 </script>
 
 <template>
@@ -97,14 +104,14 @@ import locationIcon from '@/components/icons/locationIcon.vue';
         
     </div>
 
-    <div class="mt-10 pt-4 mb-96 bg-blanc rounded-xl mx-5 shadow-drop2">
+    <div class="mt-10 pt-4 bg-blanc rounded-xl mx-5 shadow-drop2">
         <div class="">
             <h2 class="text-center font-medium font-poppins text-lg text-black">Météo</h2>
             <hr class="mt-3 mb-4 border-0 bg-lightgray h-[1px]">
             <div class="flex justify-between items-center mx-5">
                 <div class="flex items-center justify-center space-x-2">
                     <locationIcon class="h-5 w-5" />
-                    <input class="outline-none text-darkgray font-normal font-poppins text-xl " type="" placeholder="Entrer la ville ou le pays" v-model="city">
+                    <input class="w-full outline-none text-darkgray font-normal font-poppins text-xl " type="" placeholder="Entrer la ville ou le pays" v-model="city">
                 </div>
                 <button class="" @click="searchWeather">
                     <searchIcon class="h-5 w-5" />
@@ -139,6 +146,48 @@ import locationIcon from '@/components/icons/locationIcon.vue';
             </div>
         </div>
         </div> -->
+    </div>
+    <div class="mt-14 mb-24 mx-5">
+        <h1 class="vingt-med text-black text-center mb-4">Avoir les informations de :</h1>
+        <div class="bg-blanc rounded-[34px] p-6 flex items-center justify-center space-x-4 shadow-drop2">
+            <select class="outline-none appearance-none bg-blanc font-medium text-black font-poppins text-3xl " v-model="choixville.choisie">
+                <option value="Paris">Paris</option>
+                <option value="Londres">Londres</option>
+            </select>
+            <tickIcon />
+        </div>
+
+
+        
+        <div v-if="choixville.choisie === 'Paris'" class="mt-9">
+            <div class="flex flex-col gap-[10px]">
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-medium font-poppins text-2xl text-black">{{ uneInfoParis.p1_titre }}</h2>
+                        <dangerIcon class="h-6 w-6" />
+                    </div>
+                    <p class="font-normal font-poppins text-sm text-black mr-6">{{ uneInfoParis.p1_desc }}</p>
+                </div>
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-medium font-poppins text-2xl text-black">{{ uneInfoParis.p2_titre }}</h2>
+                        <securityIcon class="h-6 w-6" />
+                    </div>
+                    <p class="font-normal font-poppins text-sm text-black mr-6">{{ uneInfoParis.p2_desc }}</p>
+                </div>
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-medium font-poppins text-2xl text-black">{{ uneInfoParis.p3_titre }}</h2>
+                        <peopleIcon class="h-6 w-6" />
+                    </div>
+                    <p class="font-normal font-poppins text-sm text-black mr-6">{{ uneInfoParis.p3_desc }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div v-else-if="choixville.choisie === 'Londres'" class="mt-9">
+            
+        </div>
     </div>
 
     <!-- <div :key="index" v-for="(unpays, index) in pays" >
@@ -181,6 +230,10 @@ export default {
             error404: false,
 
             pays: null,
+
+            choixville: {
+                choisie: 'Paris',
+            },
         }
     },
     mounted() {

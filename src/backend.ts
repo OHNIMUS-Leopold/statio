@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-import type { ActiviteResponse, VilleResponse, TransportResponse, HotelResponse } from './pocketbase-types';
+import type { ActiviteResponse, VilleResponse, TransportResponse, HotelResponse, InfoResponse } from './pocketbase-types';
 export const pb = new PocketBase('http://127.0.0.1:8090');
 
 
@@ -47,4 +47,16 @@ export async function allActivitesByVilleId(id : string) {
         expand: 'activite'
      });
     return activites;
+}
+
+// export async function allInfosByVilleId(id : string) {
+//     const infos = await pb.collection('ville').getOne<VilleResponse>(id,{
+//         expand: 'info'
+//      });
+//     return infos;
+// }
+
+export async function infoID(id : string) {
+    const oneInfo = await pb.collection('info').getOne<InfoResponse>(id);
+    return oneInfo;
 }
