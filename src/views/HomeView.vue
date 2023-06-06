@@ -15,8 +15,11 @@ const ListeVilles = await allVilles();
     <HeaderComp />
 
     <main>
-        <div class="">
-            <previewVille v-for="ville in ListeVilles" :key="ville.id" v-bind="{ ...ville}" />
+        <div class="mt-7">
+            <h1 class="vingt-med text-black ml-7 mb-5">Destinations populaires</h1>
+            <div class="flex overflow-x-scroll scroll-smooth snap-mandatory snap-x overflow-hidden mx-3">
+                <previewVille v-for="ville in ListeVilles" :key="ville.id" v-bind="{ ...ville}" />
+            </div>
         </div>
     </main>
 
