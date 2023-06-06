@@ -4,25 +4,30 @@ import HeaderComp from '@/components/header.vue';
 import FooterComp from '@/components/footer.vue';
 import previewVille from '@/components/preview/previewVille.vue';
 import previewActivite from '@/components/preview/previewActivite.vue';
+import previewTransport from '@/components/preview/previewTransport.vue';
 import tickIcon from '@/components/icons/tickIcon.vue';
 import type { VilleResponse, VilleRecord, BaseSystemFields } from '@/pocketbase-types';
-import type { ActiviteResponse } from '@/pocketbase-types';
+import type { ActiviteResponse, TransportResponse } from '@/pocketbase-types';
 import { allVilles } from '@/backend';
-import { allActivitesByVilleId } from '@/backend';
+import { allActivitesByVilleId, allTransportsByVilleId } from '@/backend';
 
 const ListeVilles = await allVilles();
+
 const ActivitesParis = await allActivitesByVilleId('4z5kd1ocz8z0kc1')
 const LesActivitesDeParis:ActiviteResponse[] =  ActivitesParis.expand['activite']
 
 const ActivitesLondres = await allActivitesByVilleId('bb1fa1srm8wu67w')
 const LesActivitesDeLondres:ActiviteResponse[] =  ActivitesLondres.expand['activite']
 
+const TransportsParis = await allTransportsByVilleId('4z5kd1ocz8z0kc1')
+const LesTransportsDeParis:TransportResponse[] =  TransportsParis.expand['transport']
+
 </script>
 
 <template>
     <HeaderComp />
     
-    <main>
+    <main class="mb-80">
         <div class="mt-7">
             <h1 class="vingt-med text-black ml-7 mb-5">Destinations populaires</h1>
             <div class="flex overflow-x-scroll scroll-smooth snap-mandatory snap-x overflow-hidden mx-3">
@@ -30,7 +35,7 @@ const LesActivitesDeLondres:ActiviteResponse[] =  ActivitesLondres.expand['activ
             </div>
         </div>
 
-        <div class="mt-9 mx-5">
+        <div class="mt-14 mx-5">
             <h1 class="vingt-med text-black ml-7 mb-4">Paramétrez votre voyage</h1>
             <div class="bg-blanc rounded-[34px] p-6 flex items-center justify-center space-x-4 shadow-drop2">
                 <select class="outline-none appearance-none bg-blanc font-medium text-black font-poppins text-3xl " v-model="choixville.choisie">
@@ -46,6 +51,10 @@ const LesActivitesDeLondres:ActiviteResponse[] =  ActivitesLondres.expand['activ
                 <h2 class="seize-norm text-center text-black mb-5">Les activités sur Paris</h2>
                 <div class="grid grid-cols-2 gap-[10px]">
                     <previewActivite v-for="activite in LesActivitesDeParis" :key="activite.id" v-bind="{ ...activite}" />
+                </div>
+                <h2 class="seize-norm text-center text-black mb-5 mt-9">Les transports sur Paris</h2>
+                <div class="flex flex-col gap-[10px]">
+                    <previewTransport v-for="transport in LesTransportsDeParis" :key="transport.id" v-bind="{ ...transport}" />
                 </div>
             </div>
 
