@@ -9,153 +9,138 @@ import trashIcon from '@/components/icons/trashIcon.vue'
 <template>
     <HeaderComp />
 
-        <div v-if="user == null">
-            <div class="fixed top-0 left-0 bg-black h-screen w-full -z-10 opacity-90">
-                <p class="vingt-med text-blanc text-center mt-80 mb-5">
-                    Vous devez être connecté pour utiliser le chat !!
-                </p>
-                <RouterLink to="/connexion">
-                    <cnxButton class="mx-auto">
-                        Se connecter
-                    </cnxButton>
-                </RouterLink>
-            </div>
-        </div>
-
-        <div v-else>        
-            <div class="my-6 flex items-center justify-center space-x-2">
-                <div>
-                    <p class="seize-norm text-black">Parler avec :</p>
+        <main>
+            <div v-if="user == null">
+                <div class="fixed top-0 left-0 bg-black h-screen w-full -z-10 opacity-90">
+                    <p class="vingt-med text-blanc text-center mt-80 mb-5">
+                        Vous devez être connecté pour utiliser le chat !!
+                    </p>
+                    <RouterLink to="/connexion">
+                        <cnxButton class="mx-auto">
+                            Se connecter
+                        </cnxButton>
+                    </RouterLink>
                 </div>
-                <select class="p-3 border-2 outline-black focus:outline-blue border-black rounded-lg seize-norm text-black" v-model="userSelected" @change="selectUser">
-                    <option
-                        v-for="util in listeUsers" :key="util.uid"
-                        :value="util"
-                    >
-                    {{util.login}}
-                    </option>
-                </select>
             </div>
-
-            <div v-if="userSelected != null" class="bg-blanc rounded-t-[30px] shadow-drop-shadow pt-8 px-5 pb-32"> 
-                <form @submit.prevent="createDisc()">
+            <div v-else>
+                <div class="my-6 flex items-center justify-center space-x-2">
                     <div>
-                        <div class="mb-1">
-                            <p class="seize-norm text-black">Nouvelle discussion avec {{userSelected.login}}</p>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <input type="text" class="p-2 w-full outline-black focus:outline-blue border-black border-2 rounded-md quatorze-norm text-black" v-model="libelle" required />
-                            <button type="submit" title="Création">
-                                <newmessageIcon class="h-9 w-9" />
-                            </button> 
-                        </div>
+                        <p class="seize-norm text-black">Parler avec :</p>
                     </div>
-                </form>
-
-                <div v-if="chat.length > 0"> 
-                    <div class="">
+                    <select class="p-3 border-2 outline-black focus:outline-blue border-black rounded-lg seize-norm text-black" v-model="userSelected" @change="selectUser">
+                        <option
+                            v-for="util in listeUsers" :key="util.uid"
+                            :value="util"
+                        >
+                        {{util.login}}
+                        </option>
+                    </select>
+                </div>
+                <div v-if="userSelected != null" class="bg-blanc rounded-t-[30px] shadow-drop-shadow pt-8 px-5 pb-32">
+                    <form @submit.prevent="createDisc()">
                         <div>
-                            <div v-for="disc in chat" :key="disc.uid">
-                            <div class="">
-                                <div>
-                                    <div class="grid grid-cols-6 items-center my-4">
-                                        <button class="col-span-1" type="button" @click="viewFil(disc)" title="Voir ce fil">
-                                            <img class="rounded-full" :src="userSelected.avatar" alt="Photo de profil">
-                                        </button>
-                                        <div class="col-span-3 ml-5">
-                                            <p class="font-bold text-black font-poppins text-base">
-                                                {{disc.libelle}}
-                                            </p>
-                                        </div>
-                                        <div class="col-span-2 ml-5">
-                                            <p class="text-right douze-norm text-darkgray">
-                                                Le {{dateFr(disc.creation)}}
-                                            </p>
-                                            <button class="col-span-1 mt-2 float-right" type="button" @click="deleteFil(disc)" title="Supprimer ce fil">
-                                                <trashIcon />
+                            <div class="mb-1">
+                                <p class="seize-norm text-black">Nouvelle discussion avec {{userSelected.login}}</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="text" class="p-2 w-full outline-black focus:outline-blue border-black border-2 rounded-md quatorze-norm text-black" v-model="libelle" required />
+                                <button type="submit" title="Création">
+                                    <newmessageIcon class="h-9 w-9" />
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div v-if="chat.length > 0">
+                        <div class="">
+                            <div>
+                                <div v-for="disc in chat" :key="disc.uid">
+                                <div class="">
+                                    <div>
+                                        <div class="grid grid-cols-6 items-center my-4">
+                                            <button class="col-span-1" type="button" @click="viewFil(disc)" title="Voir ce fil">
+                                                <img class="rounded-full" :src="userSelected.avatar" alt="Photo de profil">
                                             </button>
-                                        </div>
-                                    </div>
-                                    <hr class="border-0 bg-lightgray h-[2px]">
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div v-else>
-                    <p class="mt-5">Aucun fil de discussion avec {{userSelected.login}}</p>
-                </div>
-
-
-
-                <div v-if="discussion != null"> 
-                    <div class="flex mb-3 items-end object-center justify-center">
-                        <textarea class="bg-Gris_Clair rounded-xl px-4 py-2" rows="3" 
-                            placeholder="Message" 
-                            v-model="message"
-                        ></textarea>
-                        <div class="input-group-prepend ">
-                            <button class="ml-2" @click="sendMsg()">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--fluent" width="23" height="23" preserveAspectRatio="xMidYMid meet" viewBox="0 0 28 28"><path fill="currentColor" d="M3.79 2.773L24.86 12.85a1.25 1.25 0 0 1 0 2.256L3.79 25.183a1.25 1.25 0 0 1-1.746-1.456l2.108-7.728a.5.5 0 0 1 .415-.364l10.21-1.387a.25.25 0 0 0 .195-.15l.018-.062a.25.25 0 0 0-.157-.268l-.055-.015l-10.2-1.387a.5.5 0 0 1-.414-.364L2.044 4.23A1.25 1.25 0 0 1 3.79 2.773Z"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div v-for="disc in chat" :key="disc.id">
-
-                        <div class="" v-if="disc.id == discussion.id"> 
-
-                            <div class="mx-4" v-for="msg in sortMsgByDate(disc.msg)" :key="msg.date">
-
-                                <div class="row mb-8" v-if="msg.by == user.uid">
-                                    <div class="col-4" >
-                                        <div class="flex items-center justify-end">
-                                            <h3>
-                                                {{userInfo[0].login}}  - {{dateFr(msg.date)}}
-                                            </h3>
-                                            <img  class="h-10 rounded-full ml-3" :src="userInfo[0].avatar" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-8 text-center mb-1 mx-2 grid grid-cols-2"> 
-                                        <div></div>
-                                        <div class="bg-red_message rounded-xl p-3 my-3">                        
-                                            <p>{{msg.contenu}}</p>
-                                        </div>                    
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row mb-8" v-if="msg.by == userSelected.uid">            
-                                    
-                                    <div class="col-4">
-                                        <div class="flex items-center">
-                                                <img  class="h-10 rounded-full mr-3" :src="userSelected.avatar"/>
-                                                <h3>
-                                                    {{userSelected.login}} - {{dateFr(msg.date)}}
-                                                </h3>
+                                            <div class="col-span-3 ml-5">
+                                                <p class="font-bold text-black font-poppins text-base">
+                                                    {{disc.libelle}}
+                                                </p>
                                             </div>
-                                    </div>
-
-                                    <div class="col-8 text-center mb-1 mx-2 grid grid-cols-2"> 
-                                        <div class="w-70 bg-grey_message rounded-xl col-start-1 p-3  my-3" >                        
-                                            <p>{{msg.contenu}}</p>
-                                        </div>                    
+                                            <div class="col-span-2 ml-5">
+                                                <p class="text-right douze-norm text-darkgray">
+                                                    Le {{dateFr(disc.creation)}}
+                                                </p>
+                                                <button class="col-span-1 mt-2 float-right" type="button" @click="deleteFil(disc)" title="Supprimer ce fil">
+                                                    <trashIcon />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr class="border-0 bg-lightgray h-[2px]">
                                     </div>
                                 </div>
-                            
                             </div>
-                        
-                        
+                            </div>
                         </div>
-
                     </div>
-
+                    <div v-else>
+                        <p class="mt-5">Aucun fil de discussion avec {{userSelected.login}}</p>
+                    </div>
+                    <div v-if="discussion != null">
+                        <div class="flex mb-3 items-end object-center justify-center">
+                            <textarea class="bg-Gris_Clair rounded-xl px-4 py-2" rows="3"
+                                placeholder="Message"
+                                v-model="message"
+                            ></textarea>
+                            <div class="input-group-prepend ">
+                                <button class="ml-2" @click="sendMsg()">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--fluent" width="23" height="23" preserveAspectRatio="xMidYMid meet" viewBox="0 0 28 28"><path fill="currentColor" d="M3.79 2.773L24.86 12.85a1.25 1.25 0 0 1 0 2.256L3.79 25.183a1.25 1.25 0 0 1-1.746-1.456l2.108-7.728a.5.5 0 0 1 .415-.364l10.21-1.387a.25.25 0 0 0 .195-.15l.018-.062a.25.25 0 0 0-.157-.268l-.055-.015l-10.2-1.387a.5.5 0 0 1-.414-.364L2.044 4.23A1.25 1.25 0 0 1 3.79 2.773Z"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div v-for="disc in chat" :key="disc.id">
+                            <div class="" v-if="disc.id == discussion.id">
+                                <div class="mx-4" v-for="msg in sortMsgByDate(disc.msg)" :key="msg.date">
+                                    <div class="row mb-8" v-if="msg.by == user.uid">
+                                        <div class="col-4" >
+                                            <div class="flex items-center justify-end">
+                                                <h3>
+                                                    {{userInfo[0].login}}  - {{dateFr(msg.date)}}
+                                                </h3>
+                                                <img  class="h-10 rounded-full ml-3" :src="userInfo[0].avatar" />
+                                            </div>
+                                        </div>
+                                        <div class="col-8 text-center mb-1 mx-2 grid grid-cols-2">
+                                            <div></div>
+                                            <div class="bg-red_message rounded-xl p-3 my-3">
+                                                <p>{{msg.contenu}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-8" v-if="msg.by == userSelected.uid">
+            
+                                        <div class="col-4">
+                                            <div class="flex items-center">
+                                                    <img  class="h-10 rounded-full mr-3" :src="userSelected.avatar"/>
+                                                    <h3>
+                                                        {{userSelected.login}} - {{dateFr(msg.date)}}
+                                                    </h3>
+                                                </div>
+                                        </div>
+                                        <div class="col-8 text-center mb-1 mx-2 grid grid-cols-2">
+                                            <div class="w-70 bg-grey_message rounded-xl col-start-1 p-3  my-3" >
+                                                <p>{{msg.contenu}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                </div>
+            
+            
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
 
     <FooterComp />
 </template>
