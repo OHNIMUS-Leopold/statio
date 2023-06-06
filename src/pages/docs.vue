@@ -10,6 +10,7 @@ import peopleIcon from '@/components/icons/peopleIcon.vue';
 import { infoID } from '@/backend';
 
 const uneInfoParis = await infoID('td54q4ij9nm0yjk')
+const uneInfoLondres = await infoID('pdo5kbtbjpwv39a')
 </script>
 
 <template>
@@ -186,7 +187,29 @@ const uneInfoParis = await infoID('td54q4ij9nm0yjk')
         </div>
 
         <div v-else-if="choixville.choisie === 'Londres'" class="mt-9">
-            
+            <div class="flex flex-col gap-[10px]">
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-medium font-poppins text-2xl text-black">{{ uneInfoLondres.p1_titre }}</h2>
+                        <dangerIcon class="h-6 w-6" />
+                    </div>
+                    <p class="font-normal font-poppins text-sm text-black mr-6">{{ uneInfoLondres.p1_desc }}</p>
+                </div>
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-medium font-poppins text-2xl text-black">{{ uneInfoLondres.p2_titre }}</h2>
+                        <securityIcon class="h-6 w-6" />
+                    </div>
+                    <p class="font-normal font-poppins text-sm text-black mr-6">{{ uneInfoLondres.p2_desc }}</p>
+                </div>
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-medium font-poppins text-2xl text-black">{{ uneInfoLondres.p3_titre }}</h2>
+                        <peopleIcon class="h-6 w-6" />
+                    </div>
+                    <p class="font-normal font-poppins text-sm text-black mr-6">{{ uneInfoLondres.p3_desc }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
