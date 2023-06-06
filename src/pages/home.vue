@@ -13,7 +13,7 @@ const ListeVilles = await allVilles();
 
 <template>
     <HeaderComp />
-
+zz
     <main>
         <div class="mt-7">
             <h1 class="vingt-med text-black ml-7 mb-5">Destinations populaires</h1>
@@ -23,11 +23,9 @@ const ListeVilles = await allVilles();
         </div>
     </main>
 
-
     <FooterComp />
 </template>
-<!-- 
-flex overflow-x-scroll scroll-smooth snap-mandatory snap-x overflow-hidden -->
+
 
 
 

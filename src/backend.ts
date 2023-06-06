@@ -8,6 +8,11 @@ export async function allVilles() {
     return lesvilles;
 }
 
+export async function allVillesById(id : string) {
+    const lavilles = await pb.collection('ville').getOne<VilleResponse>(id);
+    return lavilles;
+}
+
 export async function allTransportsByVilleId(id : string) {
     const transports = await pb.collection('ville').getOne<VilleResponse>(id,{
         expand: 'transport'
