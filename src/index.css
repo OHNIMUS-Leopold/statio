@@ -19,6 +19,10 @@
     @apply font-medium font-poppins text-xl 
 }
 
+.seize-norm {
+    @apply font-normal font-poppins text-base
+}
+
 .quatorze-norm {
     @apply font-normal font-poppins text-sm
 }

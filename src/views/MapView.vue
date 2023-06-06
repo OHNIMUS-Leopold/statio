@@ -9,7 +9,7 @@ import cnxButton from '@/components/cnxButton.vue';
 
     <div v-if="user == null">
         <div class="fixed top-0 left-0 bg-black h-screen w-full -z-10 opacity-90">
-            <p class="vingt-med text-blanc text-center mt-40 mb-5">
+            <p class="vingt-med text-blanc text-center mt-80 mb-5">
                 Vous devez être connecté pour utiliser la map !!
             </p>
             <RouterLink to="/connexion">

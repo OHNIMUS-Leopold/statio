@@ -1,121 +1,95 @@
 <script setup lang="ts">
 import HeaderComp from '@/components/header.vue';
 import FooterComp from '@/components/footer.vue';
+import cnxButton from '@/components/cnxButton.vue';
+import newmessageIcon from '@/components/icons/newmessageIcon.vue';
+import trashIcon from '@/components/icons/trashIcon.vue'
 </script>
 
 <template>
     <HeaderComp />
 
-    <div></div>
-
-
-    <div class="container mb-56">  
-
-        <div class="card-header">
-            <h2 class="">Messagerie</h2>
-        </div>    
-
         <div v-if="user == null">
-            <h3 class="alert alert-warning text-center text-Rouge" role="alert">
-                Vous devez être connecté pour utiliser le Chat !!
-            </h3>
+            <div class="fixed top-0 left-0 bg-black h-screen w-full -z-10 opacity-90">
+                <p class="vingt-med text-blanc text-center mt-80 mb-5">
+                    Vous devez être connecté pour utiliser le chat !!
+                </p>
+                <RouterLink to="/connexion">
+                    <cnxButton class="mx-auto">
+                        Se connecter
+                    </cnxButton>
+                </RouterLink>
+            </div>
         </div>
 
         <div v-else>        
-            <div class="mb-3">
-                <div class="">
-                    <p class="">Utilisateurs</p>
+            <div class="my-6 flex items-center justify-center space-x-2">
+                <div>
+                    <p class="seize-norm text-black">Parler avec :</p>
                 </div>
-                <select class="custom-select w-72 p-3 my-3 border-2 rounded-lg border-Gris_Clair" v-model="userSelected" @change="selectUser">
-                    <option selected disabled value="">...</option>
+                <select class="p-3 border-2 outline-black focus:outline-blue border-black rounded-lg seize-norm text-black" v-model="userSelected" @change="selectUser">
                     <option
                         v-for="util in listeUsers" :key="util.uid"
                         :value="util"
                     >
-                    <p class="">
-                       {{util.login}} 
-                    </p>
+                    {{util.login}}
                     </option>
                 </select>
             </div>
 
-            <div v-if="userSelected != null"> 
-                <form class="mb-3" @submit.prevent="createDisc()">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <p class="input-group-text">Nouveau fil avec {{userSelected.login}}</p>
+            <div v-if="userSelected != null" class="bg-blanc rounded-t-[30px] shadow-drop-shadow pt-8 px-5 pb-32"> 
+                <form @submit.prevent="createDisc()">
+                    <div>
+                        <div class="mb-1">
+                            <p class="seize-norm text-black">Nouvelle discussion avec {{userSelected.login}}</p>
                         </div>
-                        <div class="flex items-center">
-                            <input type="text" class="form-control border-2 border-Gris_Clair mr-3" v-model="libelle" required />
+                        <div class="flex items-center space-x-2">
+                            <input type="text" class="p-2 w-full outline-black focus:outline-blue border-black border-2 rounded-md quatorze-norm text-black" v-model="libelle" required />
                             <button type="submit" title="Création">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--fluent" width="23" height="23" preserveAspectRatio="xMidYMid meet" viewBox="0 0 28 28"><path fill="currentColor" d="M6.25 4.5A1.75 1.75 0 0 0 4.5 6.25v15.5A1.75 1.75 0 0 0 6 23.482V16.25A2.25 2.25 0 0 1 8.25 14h11.5A2.25 2.25 0 0 1 22 16.25v7.232a1.75 1.75 0 0 0 1.5-1.732V8.786c0-.465-.184-.91-.513-1.238l-2.535-2.535a1.75 1.75 0 0 0-1.238-.513H19v4.25A2.25 2.25 0 0 1 16.75 11h-6.5A2.25 2.25 0 0 1 8 8.75V4.5H6.25Zm3.25 0v4.25c0 .414.336.75.75.75h6.5a.75.75 0 0 0 .75-.75V4.5h-8Zm11 19v-7.25a.75.75 0 0 0-.75-.75H8.25a.75.75 0 0 0-.75.75v7.25h13ZM3 6.25A3.25 3.25 0 0 1 6.25 3h12.965a3.25 3.25 0 0 1 2.298.952l2.535 2.535c.61.61.952 1.437.952 2.299V21.75A3.25 3.25 0 0 1 21.75 25H6.25A3.25 3.25 0 0 1 3 21.75V6.25Z"></path></svg>
+                                <newmessageIcon class="h-9 w-9" />
                             </button> 
                         </div>
                     </div>
                 </form>
 
-                <h3 class="mt-5">Vos fils de discussion avec : {{userSelected.login}}</h3>
                 <div v-if="chat.length > 0"> 
-                    <table class="table text-light">
-                        <tbody>
-            
-                            <tr v-for="disc in chat" :key="disc.uid">
-                            <div class="flex">
-                                <td>
-                                    <p class="underline">
-                                        {{disc.libelle}} 
-                                    </p>   
-                                <div class="flex">
-                                    <p>
-                                        - créé par 
-                                    </p>    
-                                    <p class="underline mx-1" v-if="disc.fil[0] == user.uid">
-                                        vous
-                                    </p>
-                                    <p v-else>{{userSelected.login}}</p>
+                    <div class="">
+                        <div>
+                            <div v-for="disc in chat" :key="disc.uid">
+                            <div class="">
+                                <div>
+                                    <div class="grid grid-cols-6 items-center my-4">
+                                        <button class="col-span-1" type="button" @click="viewFil(disc)" title="Voir ce fil">
+                                            <img class="rounded-full" :src="userSelected.avatar" alt="Photo de profil">
+                                        </button>
+                                        <div class="col-span-3 ml-5">
+                                            <p class="font-bold text-black font-poppins text-base">
+                                                {{disc.libelle}}
+                                            </p>
+                                        </div>
+                                        <div class="col-span-2 ml-5">
+                                            <p class="text-right douze-norm text-darkgray">
+                                                Le {{dateFr(disc.creation)}}
+                                            </p>
+                                            <button class="col-span-1 mt-2 float-right" type="button" @click="deleteFil(disc)" title="Supprimer ce fil">
+                                                <trashIcon />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr class="border-0 bg-lightgray h-[2px]">
                                 </div>
-                                <div class="flex">
-                                    <p>
-                                        le 
-                                    </p>
-                                    <p class="underline mx-1">
-                                        {{dateFr(disc.creation)}}
-                                    </p>
-                                </div>
-                                </td>
                             </div>
-
-                            <div class="flex mb-5">
-                                <td>
-                                    <button class="mr-3" type="button" @click="viewFil(disc)" title="Voir ce fil">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="23" height="23" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z"></path></svg>
-                                    </button>
-                                    <button class="" type="button" @click="deleteFil(disc)" title="Supprimer ce fil">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ion" width="23" height="23" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path fill="none" d="M296 64h-80a7.91 7.91 0 0 0-8 8v24h96V72a7.91 7.91 0 0 0-8-8Z"></path><path fill="currentColor" d="M432 96h-96V72a40 40 0 0 0-40-40h-80a40 40 0 0 0-40 40v24H80a16 16 0 0 0 0 32h17l19 304.92c1.42 26.85 22 47.08 48 47.08h184c26.13 0 46.3-19.78 48-47l19-305h17a16 16 0 0 0 0-32ZM192.57 416H192a16 16 0 0 1-16-15.43l-8-224a16 16 0 1 1 32-1.14l8 224A16 16 0 0 1 192.57 416ZM272 400a16 16 0 0 1-32 0V176a16 16 0 0 1 32 0Zm32-304h-96V72a7.91 7.91 0 0 1 8-8h80a7.91 7.91 0 0 1 8 8Zm32 304.57A16 16 0 0 1 320 416h-.58A16 16 0 0 1 304 399.43l8-224a16 16 0 1 1 32 1.14Z"></path></svg>
-                                    </button>
-                                </td>
-                            </div>
-
-                            </tr>
-                        </tbody>
-                    </table>
-
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div v-else>
-                    Aucun fil de discussion
+                    <p class="mt-5">Aucun fil de discussion avec {{userSelected.login}}</p>
                 </div>
 
 
-                <hr class="h-2 my-3" />
 
                 <div v-if="discussion != null"> 
-                <div class="flex">
-                    <img  class="avatar h-10 rounded-full mr-4" :src="userSelected.avatar"/>
-                    <h3>{{discussion.libelle}}</h3>
-                </div>
-
-                <hr class="h-2 my-3" />
-
                     <div class="flex mb-3 items-end object-center justify-center">
                         <textarea class="bg-Gris_Clair rounded-xl px-4 py-2" rows="3" 
                             placeholder="Message" 
@@ -182,9 +156,6 @@ import FooterComp from '@/components/footer.vue';
                 </div>
             </div>
         </div>
-
-    </div>
-
 
     <FooterComp />
 </template>
