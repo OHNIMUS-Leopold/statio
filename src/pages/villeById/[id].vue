@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import locationIcon from '@/components/icons/locationIcon.vue';
 import starIcon from '@/components/icons/starIcon.vue';
 import btnDetails from '@/components/btnDetails.vue';
+import backIcon from '@/components/icons/backIcon.vue';
 import { allVillesById } from '@/backend';
 import type { VilleResponse } from '@/pocketbase-types';
 
@@ -36,6 +37,11 @@ const urlImg1 = img1 ? pb.getFileUrl(uneVilleListe, img1, { thumb: '100x250' }) 
 <template>
     <div class="">
         <div class="h-96" :style="{ backgroundImage: `url(${urlImg0})` }">
+            <div class="pt-5 pl-5">
+                <RouterLink to="/home">
+                    <backIcon />
+                </RouterLink>
+            </div>
         </div>
         <!-- <img class="h" :src="urlImg0" alt="erreur"> -->
         <div class="bg-blanc -mt-14 pt-7 rounded-3xl pb-[500px] px-5"> 
