@@ -3,11 +3,19 @@ import { pb } from '@/backend';
 import HeaderComp from '@/components/header.vue';
 import FooterComp from '@/components/footer.vue';
 import previewVille from '@/components/preview/previewVille.vue';
+import previewActivite from '@/components/preview/previewActivite.vue';
+import tickIcon from '@/components/icons/tickIcon.vue';
 import type { VilleResponse, VilleRecord, BaseSystemFields } from '@/pocketbase-types';
+import type { ActiviteResponse } from '@/pocketbase-types';
 import { allVilles } from '@/backend';
+import { allActivitesByVilleId } from '@/backend';
 
 const ListeVilles = await allVilles();
+const ActivitesParis = await allActivitesByVilleId('4z5kd1ocz8z0kc1')
+const LesActivitesDeParis:ActiviteResponse[] =  ActivitesParis.expand['activite']
 
+const ActivitesLondres = await allActivitesByVilleId('bb1fa1srm8wu67w')
+const LesActivitesDeLondres:ActiviteResponse[] =  ActivitesLondres.expand['activite']
 
 </script>
 
@@ -21,10 +29,53 @@ const ListeVilles = await allVilles();
                 <previewVille v-for="ville in ListeVilles" :key="ville.id" v-bind="{ ...ville}" />
             </div>
         </div>
+
+        <div class="mt-9 mx-5">
+            <h1 class="vingt-med text-black ml-7 mb-4">Paramétrez votre voyage</h1>
+            <div class="bg-blanc rounded-[34px] p-6 flex items-center justify-center space-x-4 shadow-drop2">
+                <select class="outline-none appearance-none bg-blanc font-medium text-black font-poppins text-3xl " v-model="choixville.choisie">
+                    <option value="Paris">Paris</option>
+                    <option value="Londres">Londres</option>
+                </select>
+                <tickIcon />
+            </div>
+
+
+            
+            <div v-if="choixville.choisie === 'Paris'" class="mt-9">
+                <h2 class="seize-norm text-center text-black mb-5">Les activités sur Paris</h2>
+                <div class="grid grid-cols-2 gap-[10px]">
+                    <previewActivite v-for="activite in LesActivitesDeParis" :key="activite.id" v-bind="{ ...activite}" />
+                </div>
+            </div>
+
+            <div v-else-if="choixville.choisie === 'Londres'" class="mt-9">
+                <h2 class="seize-norm text-center text-black mb-5">Les activités sur Londres</h2>
+                <div class="grid grid-cols-2 gap-[10px]">
+                    <previewActivite v-for="activiteL in LesActivitesDeLondres" :key="activiteL.id" v-bind="{ ...activiteL}" />
+                </div>
+            </div>
+        </div>
     </main>
 
     <FooterComp />
 </template>
+
+
+
+<script lang="ts">
+
+export default {
+    data () {
+        return {
+            choixville: {
+                choisie: 'Paris',
+            },
+        }
+    }
+}
+
+</script>
 
 
 
