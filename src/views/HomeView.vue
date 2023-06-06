@@ -1,18 +1,30 @@
 <script setup lang="ts">
+import { pb } from '@/backend';
 import HeaderComp from '@/components/header.vue';
 import FooterComp from '@/components/footer.vue';
+import previewVille from '@/components/preview/previewVille.vue';
+import type { VilleResponse, VilleRecord, BaseSystemFields } from '@/pocketbase-types';
+import { allVilles } from '@/backend';
+
+const ListeVilles = await allVilles();
+
+
 </script>
 
 <template>
     <HeaderComp />
 
     <main>
-        
+        <div class="">
+            <previewVille v-for="ville in ListeVilles" :key="ville.id" v-bind="{ ...ville}" />
+        </div>
     </main>
 
 
     <FooterComp />
 </template>
+<!-- 
+flex overflow-x-scroll scroll-smooth snap-mandatory snap-x overflow-hidden -->
 
 
 
