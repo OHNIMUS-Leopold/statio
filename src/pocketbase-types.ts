@@ -5,6 +5,7 @@
 export enum Collections {
 	Activite = "activite",
 	Hotel = "hotel",
+	Info = "info",
 	Transport = "transport",
 	Users = "users",
 	Ville = "ville",
@@ -60,6 +61,15 @@ export type HotelRecord = {
 	preview?: string
 }
 
+export type InfoRecord = {
+	p1_titre?: string
+	p1_desc?: string
+	p2_titre?: string
+	p2_desc?: string
+	p3_titre?: string
+	p3_desc?: string
+}
+
 export type TransportRecord = {
 	nom?: string
 	localisation?: string
@@ -91,11 +101,13 @@ export type VilleRecord = {
 	hotel?: RecordIdString[]
 	activite?: RecordIdString[]
 	transport?: RecordIdString[]
+	info?: RecordIdString
 }
 
 // Response types include system fields and match responses from the PocketBase API
 export type ActiviteResponse = Required<ActiviteRecord> & BaseSystemFields
 export type HotelResponse = Required<HotelRecord> & BaseSystemFields
+export type InfoResponse = Required<InfoRecord> & BaseSystemFields
 export type TransportResponse = Required<TransportRecord> & BaseSystemFields
 export type UsersResponse = Required<UsersRecord> & AuthSystemFields
 export type VilleResponse<Texpand = unknown> = Required<VilleRecord> & BaseSystemFields<Texpand>
@@ -105,6 +117,7 @@ export type VilleResponse<Texpand = unknown> = Required<VilleRecord> & BaseSyste
 export type CollectionRecords = {
 	activite: ActiviteRecord
 	hotel: HotelRecord
+	info: InfoRecord
 	transport: TransportRecord
 	users: UsersRecord
 	ville: VilleRecord
@@ -113,6 +126,7 @@ export type CollectionRecords = {
 export type CollectionResponses = {
 	activite: ActiviteResponse
 	hotel: HotelResponse
+	info: InfoResponse
 	transport: TransportResponse
 	users: UsersResponse
 	ville: VilleResponse
