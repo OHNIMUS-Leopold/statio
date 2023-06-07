@@ -239,7 +239,7 @@ export default {
                 currencies: 'USD'
             },
             results: null,
-            currencyApi: new CurrencyAPI('CURRENCY-API'),
+            currencyApi: new CurrencyAPI('45ORre8htUcRSe3R7G770MVE6R0JmUHbq3id6j4U'),
             multiplier: 1,
 
             city: '',
