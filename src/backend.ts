@@ -1,6 +1,7 @@
 import PocketBase from 'pocketbase';
 import type { ActiviteResponse, VilleResponse, TransportResponse, HotelResponse, InfoResponse } from './pocketbase-types';
-export const pb = new PocketBase('http://127.0.0.1:8090');
+// export const pb = new PocketBase('http://127.0.0.1:8090');
+export const pb = new PocketBase('https://statio.pockethost.io/');
 
 
 export async function allVilles() {
