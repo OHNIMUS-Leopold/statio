@@ -15,21 +15,27 @@ import { allActivitesByVilleId, allTransportsByVilleId, allHotelsByVilleId } fro
 const ListeVilles = await allVilles();
 
 const ActivitesParis = await allActivitesByVilleId('4z5kd1ocz8z0kc1')
+//@ts-ignore
 const LesActivitesDeParis:ActiviteResponse[] =  ActivitesParis.expand['activite']
 
 const ActivitesLondres = await allActivitesByVilleId('bb1fa1srm8wu67w')
+//@ts-ignore
 const LesActivitesDeLondres:ActiviteResponse[] =  ActivitesLondres.expand['activite']
 
 const TransportsParis = await allTransportsByVilleId('4z5kd1ocz8z0kc1')
+//@ts-ignore
 const LesTransportsDeParis:TransportResponse[] =  TransportsParis.expand['transport']
 
 const TransportsLondres = await allTransportsByVilleId('bb1fa1srm8wu67w')
+//@ts-ignore
 const LesTransportsDeLondres:TransportResponse[] =  TransportsLondres.expand['transport']
 
 const HotelsParis = await allHotelsByVilleId('4z5kd1ocz8z0kc1')
+//@ts-ignore
 const LesHotelsDeParis:HotelResponse[] =  HotelsParis.expand['hotel']
 
 const HotelsLondres = await allHotelsByVilleId('bb1fa1srm8wu67w')
+//@ts-ignore
 const LesHotelsDeLondres:HotelResponse[] =  HotelsLondres.expand['hotel']
 </script>
 

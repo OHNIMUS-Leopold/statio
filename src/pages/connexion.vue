@@ -68,6 +68,7 @@ import cnxButton from '@/components/cnxButton.vue';
    
 
 <script lang="ts">
+//@ts-ignore
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js'
 
 import {
@@ -78,14 +79,18 @@ import {
     addDoc,
     updateDoc,
     deleteDoc,
+    //@ts-ignore
     onSnapshot } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
 
 
     function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");
+    //@ts-ignore
     if (passwordInput.type === "password") {
+        //@ts-ignore
         passwordInput.type = "text";
     } else {
+        //@ts-ignore
         passwordInput.type = "password";
     }
 }
@@ -106,9 +111,12 @@ import {
             let user = getAuth().currentUser;
             if (user){
                 this.user = user;
+                //@ts-ignore
                 this.message = "Utilisateur déjà connecté";
+                //@ts-ignore
                 this.valeur = 1;
             }else{
+                //@ts-ignore
                 this.message = "Utilisateur non connecté";
                 this.valeur = null;
             }
@@ -117,15 +125,20 @@ import {
         methods:{
             onCnx(){
                 signInWithEmailAndPassword(getAuth(), this.user.email, this.user.password)
+                //@ts-ignore
                 .then((response)=>{
                     console.log('Utilisateur connecté', response.user);
                     this.user = response.user;
+                    //@ts-ignore
                     this.message = "Utilisateur connecté";
+                    //@ts-ignore
                     this.valeur = 1;
                     this.$router.replace('home');
                 })
+                //@ts-ignore
                 .catch((error)=>{
                     console.log("Erreur connexion", error);
+                    //@ts-ignore
                     this.message = "Erreur d'authentification";
                     this.valeur = null;
                     
@@ -133,6 +146,7 @@ import {
             },
             onDcnx(){
                 signOut(getAuth())
+                //@ts-ignore
                 .then((response) =>{
                     this.user = getAuth().currentUser;
                     this.user = {
@@ -140,10 +154,12 @@ import {
                         password:null
                     };
                     console.log("Utilisateur deconnecté ", this.user);
+                    //@ts-ignore
                     this.message = "Utilisateur non connecté";
                     this.valeur = null;
                     this.$router.replace('connexion');
                 })
+                //@ts-ignore
                 .catch((error)=>{
                     console.log("Erreur deconnexion", error);
                 })

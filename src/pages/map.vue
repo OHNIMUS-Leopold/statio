@@ -21,7 +21,7 @@ import cnxButton from '@/components/cnxButton.vue';
             </div>
         </div>
         <div v-else class="w-full h-[80vh]">
-            <iframe class="-z-10 w-full h-full" id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.77824502267!2d2.2646342637778925!3d48.85893843503862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1685990460096!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe class="-z-10 w-full h-full" id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.77824502267!2d2.2646342637778925!3d48.85893843503862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1685990460096!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </main>
 
@@ -44,6 +44,7 @@ import {
     query,          // Permet d'effectuer des requêtes sur Firestore
     orderBy,        // Permet de demander le tri d'une requête query
     where           // Permet de demander un filtrage pour une query
+    //@ts-ignore
     } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
 
     // Cloud Storage : import des fonctions
@@ -51,9 +52,11 @@ import {
         getStorage,             // Obtenir le Cloud Storage
         ref,                    // Pour créer une référence à un fichier à uploader
         getDownloadURL         // Permet de récupérer l'adress complète d'un fichier du Storage
+        //@ts-ignore
     } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js'
 
 // Fonction authentification
+//@ts-ignore
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js'
 
 export default {
@@ -89,9 +92,11 @@ export default {
         // obtenir les utilisateurs de users
         async getUsers(){
             // Obtenir les inofrmations du user connecté
+            //@ts-ignore
             await getAuth().onAuthStateChanged(function(user){
                 if(user){
                     // Récupération du user connecté
+                    //@ts-ignore
                     this.user = user;
                 }
             }.bind(this))
@@ -103,7 +108,9 @@ export default {
             // Users triés sur leur login
             const q = query(dbUsers, orderBy('login', 'asc'));
             // Liste synchronisée
+            //@ts-ignore
             await onSnapshot(q, (snapshot) => {
+                //@ts-ignore
                 this.listeUsers = snapshot.docs.map(doc => (
                     {id:doc.id, ...doc.data()}
                 ))
@@ -112,11 +119,14 @@ export default {
                     // Obtenir le Cloud Storage
                     const storage = getStorage();
                     // Récupérer l'image par son nom de fichier
+                    //@ts-ignore
                     const spaceRef = ref(storage, "users/"+user.avatar);
                     // Récupération de l'url
                     getDownloadURL(spaceRef)
+                    //@ts-ignore
                     .then((url)=>{
                         // Remplacer le nom du fichier par l'url
+                        //@ts-ignore
                         user.avatar = url;
                     })
                     // .catch((error)=>{
@@ -125,9 +135,11 @@ export default {
                 })
 
                 // Récupérer les infos complémentaires du user connecté
+                //@ts-ignore
                 this.userInfo = this.listeUsers.filter(user => user.uid == this.user.uid);
 //console.log("userInfo", this.userInfo);
                 // Suppression du user connecté de la liste
+                //@ts-ignore
                 this.listeUsers = this.listeUsers.filter(user => user.uid != this.user.uid);
 //console.log("ListeUsers", this.listeUsers);
 

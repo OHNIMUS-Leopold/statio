@@ -79,16 +79,22 @@ const uneInfoLondres = await infoID('pdo5kbtbjpwv39a')
                 </div>
                 <div
                     v-for="result of results"
-                    :key="result.code"
+                    :key="//@ts-ignore
+                    result.code"
                     class="flex mt-4 ml-3 mr-7 items-center justify-between"
                 >
-                <p class="pt-2 w-48 text-blue font-poppins font-normal text-5xl">{{ multiplyResult(result.value) }}</p>
-                <p class="pt-2 quatorze-norm text-black">{{ result.code }}</p>
+                <p class="pt-2 w-48 text-blue font-poppins font-normal text-5xl">{{ multiplyResult(//@ts-ignore
+                result.value) }}</p>
+                <p class="pt-2 quatorze-norm text-black">{{//@ts-ignore
+                 result.code }}</p>
                 </div>
                 <div v-for="result of results"
-                    :key="result.code" class="text-center">
+                    :key="//@ts-ignore
+                    result.code" class="text-center">
                     <hr class="mt-5 border-0 bg-lightgray h-[1px]">
-                    <p class="quatorze-norm text-black mt-3">1 {{ params.base_currency }} = {{ result.value }} {{ result.code }}</p>
+                    <p class="quatorze-norm text-black mt-3">1 {{ params.base_currency }} = {{//@ts-ignore
+                     result.value }} {{//@ts-ignore
+                         result.code }}</p>
                 </div>
             </form>
         
@@ -227,6 +233,7 @@ const uneInfoLondres = await infoID('pdo5kbtbjpwv39a')
 
 
 <script lang="ts">
+//@ts-ignore
 import CurrencyAPI from '@everapi/currencyapi-js';
 import axios from 'axios';
 
@@ -264,6 +271,7 @@ export default {
     computed: {
     weatherImage(): string {
       if (!this.weatherData) return '';
+      //@ts-ignore
       switch (this.weatherData.weather[0].main) {
         case 'Clear':
           return '/src/assets/img/weather/clear.png';
@@ -281,18 +289,22 @@ export default {
     },
     weatherTemperature(): string {
       if (!this.weatherData) return '';
+      //@ts-ignore
       return `${parseInt(this.weatherData.main.temp)}`;
     },
     weatherDescription(): string {
       if (!this.weatherData) return '';
+      //@ts-ignore
       return this.weatherData.weather[0].description;
     },
     humidity(): string {
       if (!this.weatherData) return '';
+      //@ts-ignore
       return `${this.weatherData.main.humidity}`;
     },
     windSpeed(): string {
       if (!this.weatherData) return '';
+      //@ts-ignore
       return `${parseInt(this.weatherData.wind.speed)}`;
     }
   },
@@ -300,13 +312,16 @@ export default {
     methods: {
         submit () {
             this.results = null;
+            //@ts-ignore
             this.currencyApi.latest(this.params).then(response => {
                 if (response.data) {
                     this.results = response.data;
                 }
             });
         },
+        //@ts-ignore
         multiplyResult(value) {
+            //@ts-ignore
         const multiplierValue = parseFloat(this.multiplier);
         if (!isNaN(multiplierValue)) {
             return Math.round((value * multiplierValue) * 100) / 100;

@@ -30,10 +30,12 @@ import sendIcon from '@/components/icons/sendIcon.vue';
                     </div>
                     <select class="p-3 border-2 outline-black focus:outline-blue border-black rounded-lg seize-norm text-black" v-model="userSelected" @change="selectUser">
                         <option
-                            v-for="util in listeUsers" :key="util.uid"
+                            v-for="util in listeUsers" :key="//@ts-ignore
+                            util.uid"
                             :value="util"
                         >
-                        {{util.login}}
+                        {{//@ts-ignore
+                        util.login}}
                         </option>
                     </select>
                 </div>
@@ -41,7 +43,8 @@ import sendIcon from '@/components/icons/sendIcon.vue';
                     <form @submit.prevent="createDisc()">
                         <div>
                             <div class="mb-1">
-                                <p class="seize-norm text-black">Nouvelle discussion avec {{userSelected.login}}</p>
+                                <p class="seize-norm text-black">Nouvelle discussion avec {{//@ts-ignore
+                                userSelected.login}}</p>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <input type="text" class="p-2 w-full outline-black focus:outline-blue border-black border-2 rounded-md quatorze-norm text-black" v-model="libelle" required />
@@ -54,21 +57,25 @@ import sendIcon from '@/components/icons/sendIcon.vue';
                     <div v-if="chat.length > 0">
                         <div class="">
                             <div>
-                                <div v-for="disc in chat" :key="disc.uid">
+                                <div v-for="disc in chat" :key="//@ts-ignore
+                                disc.uid">
                                 <div class="">
                                     <div>
                                         <div class="grid grid-cols-6 items-center my-4">
                                             <button class="col-span-1" type="button" @click="viewFil(disc)" title="Voir ce fil">
-                                                <img class="rounded-full" :src="userSelected.avatar" alt="Photo de profil">
+                                                <img class="rounded-full" :src="//@ts-ignore
+                                                userSelected.avatar" alt="Photo de profil">
                                             </button>
                                             <div class="col-span-3 ml-5">
                                                 <p class="font-bold text-black font-poppins text-base">
-                                                    {{disc.libelle}}
+                                                    {{//@ts-ignore
+                                                    disc.libelle}}
                                                 </p>
                                             </div>
                                             <div class="col-span-2 ml-5">
                                                 <p class="text-right douze-norm text-darkgray">
-                                                    Le {{dateFr(disc.creation)}}
+                                                    Le {{//@ts-ignore
+                                                    dateFr(disc.creation)}}
                                                 </p>
                                                 <button class="col-span-1 mt-2 float-right" type="button" @click="deleteFil(disc)" title="Supprimer ce fil">
                                                     <trashIcon />
@@ -83,13 +90,14 @@ import sendIcon from '@/components/icons/sendIcon.vue';
                         </div>
                     </div>
                     <div v-else>
-                        <p class="mt-5">Aucun fil de discussion avec {{userSelected.login}}</p>
+                        <p class="mt-5">Aucun fil de discussion avec {{//@ts-ignore
+                        userSelected.login}}</p>
                     </div>
                     <div v-if="discussion != null">
                         <div class="flex my-3 mx-5 justify-center items-center">
                             <textarea class="font-poppins font-normal text-black text-base bg-blanc border-black border-[1px] outline-blue rounded-xl px-4 py-2 w-full" 
-                                placeholder="Message"
-                                v-model="message"
+                                placeholder="Message" 
+                                v-model="(message as any)"
                             ></textarea>
                             <div class="input-group-prepend ">
                                 <button class="ml-2" @click="sendMsg()">
@@ -97,16 +105,22 @@ import sendIcon from '@/components/icons/sendIcon.vue';
                                 </button>
                             </div>
                         </div>
-                        <div v-for="disc in chat" :key="disc.id">
-                            <div class="" v-if="disc.id == discussion.id">
-                                <div class="mx-4" v-for="msg in sortMsgByDate(disc.msg)" :key="msg.date">
-                                    <div class="row mb-8" v-if="msg.by == user.uid">
+                        <div v-for="disc in chat" :key="//@ts-ignore
+                        disc.id">
+                            <div class="" v-if="//@ts-ignore
+                            disc.id == discussion.id">
+                                <div class="mx-4" v-for="msg in sortMsgByDate(//@ts-ignore
+                                disc.msg)" :key="msg.date">
+                                    <div class="row mb-8" v-if="//@ts-ignore
+                                    msg.by == user.uid">
                                         <div class="col-4" >
                                             <div class="flex items-center justify-end">
                                                 <h3>
-                                                    {{userInfo[0].login}}  - {{dateFr(msg.date)}}
+                                                    {{//@ts-ignore
+                                                    userInfo[0].login}}  - {{dateFr(msg.date)}}
                                                 </h3>
-                                                <img  class="h-10 rounded-full ml-3" :src="userInfo[0].avatar" />
+                                                <img  class="h-10 rounded-full ml-3" :src="//@ts-ignore
+                                                userInfo[0].avatar" />
                                             </div>
                                         </div>
                                         <div class="col-8 text-center mb-1 mx-2 grid grid-cols-2">
@@ -120,9 +134,11 @@ import sendIcon from '@/components/icons/sendIcon.vue';
             
                                         <div class="col-4">
                                             <div class="flex items-center">
-                                                    <img  class="h-10 rounded-full mr-3" :src="userSelected.avatar"/>
+                                                    <img  class="h-10 rounded-full mr-3" :src="//@ts-ignore
+                                                    userSelected.avatar"/>
                                                     <h3>
-                                                        {{userSelected.login}} - {{dateFr(msg.date)}}
+                                                        {{//@ts-ignore
+                                                        userSelected.login}} - {{dateFr(msg.date)}}
                                                     </h3>
                                                 </div>
                                         </div>
@@ -162,6 +178,7 @@ import {
     query,          // Permet d'effectuer des requêtes sur Firestore
     orderBy,        // Permet de demander le tri d'une requête query
     where           // Permet de demander un filtrage pour une query
+    //@ts-ignore
     } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
 
     // Cloud Storage : import des fonctions
@@ -169,9 +186,11 @@ import {
         getStorage,             // Obtenir le Cloud Storage
         ref,                    // Pour créer une référence à un fichier à uploader
         getDownloadURL         // Permet de récupérer l'adress complète d'un fichier du Storage
+        //@ts-ignore
     } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js'
 
 // Fonction authentification
+//@ts-ignore
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js'
 
 export default {
@@ -207,9 +226,11 @@ export default {
         // obtenir les utilisateurs de users
         async getUsers(){
             // Obtenir les inofrmations du user connecté
+            //@ts-ignore
             await getAuth().onAuthStateChanged(function(user){
                 if(user){
                     // Récupération du user connecté
+                    //@ts-ignore
                     this.user = user;
                 }
             }.bind(this))
@@ -221,7 +242,9 @@ export default {
             // Users triés sur leur login
             const q = query(dbUsers, orderBy('login', 'asc'));
             // Liste synchronisée
+            //@ts-ignore
             await onSnapshot(q, (snapshot) => {
+                //@ts-ignore
                 this.listeUsers = snapshot.docs.map(doc => (
                     {id:doc.id, ...doc.data()}
                 ))
@@ -230,11 +253,14 @@ export default {
                     // Obtenir le Cloud Storage
                     const storage = getStorage();
                     // Récupérer l'image par son nom de fichier
+                    //@ts-ignore
                     const spaceRef = ref(storage, "users/"+user.avatar);
                     // Récupération de l'url
                     getDownloadURL(spaceRef)
+                    //@ts-ignore
                     .then((url)=>{
                         // Remplacer le nom du fichier par l'url
+                        //@ts-ignore
                         user.avatar = url;
                     })
                     // .catch((error)=>{
@@ -243,9 +269,11 @@ export default {
                 })
 
                 // Récupérer les infos complémentaires du user connecté
+                //@ts-ignore
                 this.userInfo = this.listeUsers.filter(user => user.uid == this.user.uid);
 //console.log("userInfo", this.userInfo);
                 // Suppression du user connecté de la liste
+                //@ts-ignore
                 this.listeUsers = this.listeUsers.filter(user => user.uid != this.user.uid);
 //console.log("ListeUsers", this.listeUsers);
 
@@ -259,27 +287,33 @@ export default {
             // Base de données concernée
             const dbChat = collection(firestore, "chat");
             // Liste des users emetteur vers recepteur
+            //@ts-ignore
             let list1 = [this.user.uid, this.userSelected.uid];
             // Requête
             let q1 = query(dbChat, where("fil", "==", list1));
             // Liste synchronisée
-            
+            //@ts-ignore
             await onSnapshot(q1, (snapshot) => {
+                //@ts-ignore
                 this.chatFrom = snapshot.docs.map(doc => (
                     {id: doc.id, ...doc.data()}
                 ))
             
                 // Liste des users selectionne / connecté
+                //@ts-ignore
                 let list2 = [this.userSelected.uid, this.user.uid ];
                 // Requête
                 let q2 = query(dbChat, where("fil", "==", list2));
-                // Liste synchronisée                
+                // Liste synchronisée               
+                //@ts-ignore 
                 onSnapshot(q2, (snapshot) => {
+                    //@ts-ignore
                     this.chatTo = snapshot.docs.map(doc => (
                         {id: doc.id, ...doc.data()}
                     ))
 
                     // Fusion des 2 chats from et to dans le chat
+                    //@ts-ignore
                     this.chat = this.chatFrom.concat(this.chatTo);
 //console.log("chat", this.chat);                
 
@@ -297,6 +331,7 @@ export default {
         createDisc(){
             // Au moins un message pour initialisation de la discussion
             let msg = {
+                //@ts-ignore
                 by: this.user.uid,                      // Créateur du message
                 contenu: "Création du fil : "+this.dateSql(),     // Message + Date du jour
                 date : this.dateSql()                   // Date de création
@@ -304,6 +339,7 @@ export default {
 
             let discussion = {
                 creation: this.dateSql(),                   // Date création de la discussion
+                //@ts-ignore
                 fil:[this.user.uid, this.userSelected.uid], // De qui vers qui : 0 : emetteur - 1: recepteur
                 libelle : this.libelle,                     // Libelle de la discussion
                 msg:[msg]
@@ -318,8 +354,10 @@ export default {
             let today = new Date();
             // Transformer en format local
             // format : dd/mm/yyyy, HH:mm:ss
+            //@ts-ignore
             today = today.toLocaleString();
             // Mise en forme en format yyyy-mm-dd HH:mm:ss
+            //@ts-ignore
             let tab = today.split(',');
             // récupérer seulement la partie date
             let d = tab[0];
@@ -329,6 +367,7 @@ export default {
             let mois = dt[1];
             let annee = dt[2];
             // date en format bdd
+            //@ts-ignore
             today = annee+"-"+mois+"-"+jour;
             return today;
         },
@@ -336,6 +375,7 @@ export default {
         // Mise en forme d'un date
         // d'un format : yyyy-mm-dd HH:mm:ss
         // en format : dd/mm/yyyy à HH:mm
+        //@ts-ignore
         dateFr(date){
             // découpage de la date
             let d = date.split(' ');
@@ -353,11 +393,11 @@ export default {
             return dateMsg;
         },
 
-
+//@ts-ignore
         viewFil(disc){
             this.discussion = disc;
         },
-
+//@ts-ignore
         deleteFil(disc){
             deleteDoc(
                 doc(getFirestore(), 'chat', disc.id)
@@ -366,6 +406,7 @@ export default {
 
         async sendMsg(){
             let msg = {
+                //@ts-ignore
                 by: this.user.uid,                      // Créateur du message
                 contenu: this.message,                  // Message rédigé
                 date : this.dateSql()                   // Date de création
@@ -375,12 +416,14 @@ export default {
             // Pour avoir tous les messages
             // surtout le dernier
             const firestore = getFirestore();
+            //@ts-ignore
             const docRef = doc(firestore, "chat", this.discussion.id);
             let refDisc = await getDoc(docRef);
             let tabMsg = refDisc.data().msg;
             tabMsg.push(msg);
             // Mise à jour de la discussion
             updateDoc(
+                //@ts-ignore
                 doc(firestore, "chat", this.discussion.id),
                 {
                     msg:tabMsg
@@ -388,8 +431,9 @@ export default {
             );
 
         },
-
+//@ts-ignore
         sortMsgByDate(tabMsg){
+            //@ts-ignore
             return tabMsg.sort(function(a,b){
                 // Si la date du message a est avant celle du message b on retourne 1
                 if(a.date < b.date) return 1;
