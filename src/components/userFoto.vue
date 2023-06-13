@@ -1,6 +1,7 @@
 <template>
     <div class="w-10 h-10 relative" v-if="userInfo !== null">
-        <img class="absolute rounded-full left-[-1px] top-[-1px]" :src="userInfo[0].avatar" alt="" />
+        <img class="absolute rounded-full left-[-1px] top-[-1px]" :src="//@ts-ignore
+        userInfo[0].avatar" alt="" />
         <svg
             width="12"
             height="12"
@@ -33,6 +34,7 @@ import {
     query,          // Permet d'effectuer des requêtes sur Firestore
     orderBy,        // Permet de demander le tri d'une requête query
     where           // Permet de demander un filtrage pour une query
+    //@ts-ignore
     } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
 
     // Cloud Storage : import des fonctions
@@ -40,9 +42,11 @@ import {
         getStorage,             // Obtenir le Cloud Storage
         ref,                    // Pour créer une référence à un fichier à uploader
         getDownloadURL         // Permet de récupérer l'adress complète d'un fichier du Storage
+        //@ts-ignore
     } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js'
 
 // Fonction authentification
+//@ts-ignore
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js'
 
 export default {
@@ -78,9 +82,11 @@ export default {
         // obtenir les utilisateurs de users
         async getUsers(){
             // Obtenir les inofrmations du user connecté
+            //@ts-ignore
             await getAuth().onAuthStateChanged(function(user){
                 if(user){
                     // Récupération du user connecté
+                    //@ts-ignore
                     this.user = user;
                 }
             }.bind(this))
@@ -92,7 +98,9 @@ export default {
             // Users triés sur leur login
             const q = query(dbUsers, orderBy('login', 'asc'));
             // Liste synchronisée
+            //@ts-ignore
             await onSnapshot(q, (snapshot) => {
+                //@ts-ignore
                 this.listeUsers = snapshot.docs.map(doc => (
                     {id:doc.id, ...doc.data()}
                 ))
@@ -101,11 +109,14 @@ export default {
                     // Obtenir le Cloud Storage
                     const storage = getStorage();
                     // Récupérer l'image par son nom de fichier
+                    //@ts-ignore
                     const spaceRef = ref(storage, "users/"+user.avatar);
                     // Récupération de l'url
                     getDownloadURL(spaceRef)
+                    //@ts-ignore
                     .then((url)=>{
                         // Remplacer le nom du fichier par l'url
+                        //@ts-ignore
                         user.avatar = url;
                     })
                     // .catch((error)=>{
@@ -114,11 +125,11 @@ export default {
                 })
 
                 // Récupérer les infos complémentaires du user connecté
-                
+                //@ts-ignore
                 this.userInfo = this.listeUsers.filter(user => user.uid == this.user.uid);
 //console.log("userInfo", this.userInfo);
                 // Suppression du user connecté de la liste
-                
+                //@ts-ignore
                 this.listeUsers = this.listeUsers.filter(user => user.uid != this.user.uid);
 //console.log("ListeUsers", this.listeUsers);
 

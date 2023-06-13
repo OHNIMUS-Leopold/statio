@@ -8,6 +8,7 @@ import type { ActiviteResponse } from '@/pocketbase-types'
 
 const props = defineProps<ActiviteResponse>()
 
+//@ts-ignore
 const img0 = props.preview
 const urlImg0 = img0 ? pb.getFileUrl(props, img0, { thumb: '100x250' }) : '/image-not-found.png'
 

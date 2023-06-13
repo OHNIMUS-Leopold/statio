@@ -130,7 +130,8 @@ import sendIcon from '@/components/icons/sendIcon.vue';
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-8" v-if="msg.by == userSelected.uid">
+                                    <div class="row mb-8" v-if="//@ts-ignore
+                                    msg.by == userSelected.uid">
             
                                         <div class="col-4">
                                             <div class="flex items-center">
