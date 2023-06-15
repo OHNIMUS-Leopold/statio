@@ -125,7 +125,7 @@ const uneInfoLondres = await infoID('pdo5kbtbjpwv39a')
                 </div>
             </div>
             <div class="" v-show="error404">
-            <img class="mx-auto my-8" src="../../src/assets/img/weather/404.png">
+            <img class="mx-auto w-4/5 my-8" src="../../src/assets/img/weather/404.png">
             <p class="text-center vingt-quatre-semi text-black pb-12">Le lieu est invalide</p>
             </div>
             <div class="px-16" v-show="!error404">
