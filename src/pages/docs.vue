@@ -283,15 +283,15 @@ export default {
       //@ts-ignore
       switch (this.weatherData.weather[0].main) {
         case 'Clear':
-          return '../../src/assets/img/weather/clear.png';
+          return '/assets/img/weather/clear.png';
         case 'Rain':
-          return '../../src/assets/img/weather/rain.png';
+          return '/assets/img/weather/rain.png';
         case 'Snow':
-          return '../../src/assets/img/weather/snow.png';
+          return '/assets/img/weather/snow.png';
         case 'Clouds':
-          return '../../src/assets/img/weather/cloud.png';
+          return '/assets/img/weather/cloud.png';
         case 'Haze':
-          return '../../src/assets/img/weather/mist.png';
+          return '/assets/img/weather/mist.png';
         default:
           return '';
       }
