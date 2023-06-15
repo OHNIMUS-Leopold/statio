@@ -225,6 +225,15 @@ const uneInfoLondres = await infoID('pdo5kbtbjpwv39a')
     </div> -->
 
 
+    <div class="hidden">
+        <img src="../../src/assets/img/weather/clear.png" alt="">
+        <img src="../../src/assets/img/weather/cloud.png" alt="">
+        <img src="../../src/assets/img/weather/mist.png" alt="">
+        <img src="../../src/assets/img/weather/rain.png" alt="">
+        <img src="../../src/assets/img/weather/snow.png" alt="">
+    </div>
+
+
     <FooterComp />
     
 </template>
