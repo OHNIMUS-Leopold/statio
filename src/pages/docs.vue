@@ -283,15 +283,20 @@ export default {
       //@ts-ignore
       switch (this.weatherData.weather[0].main) {
         case 'Clear':
-          return '/assets/img/weather/clear.png';
+          return '/assets/clear-c26a34df.png';
+          // "../../src/assets/img/weather/clear.png" en local
         case 'Rain':
-          return '/assets/img/weather/rain.png';
+          return '/assets/rain-d03b45d5.png';
+          // "../../src/assets/img/weather/rain.png" en local
         case 'Snow':
-          return '/assets/img/weather/snow.png';
+          return '/assets/snow-bdc1e4eb.png';
+          // "../../src/assets/img/weather/snow.png" en local
         case 'Clouds':
-          return '/assets/img/weather/cloud.png';
+          return '/assets/cloud-59b9f12a.png';
+          // "../../src/assets/img/weather/cloud.png" en local
         case 'Haze':
-          return '/assets/img/weather/mist.png';
+          return '/assets/mist-837fcaa8.png';
+          // "../../src/assets/img/weather/mist.png" en local
         default:
           return '';
       }
