@@ -125,7 +125,7 @@ const uneInfoLondres = await infoID('pdo5kbtbjpwv39a')
                 </div>
             </div>
             <div class="" v-show="error404">
-            <img class="mx-auto my-8" src="/src/assets/img/weather/404.png">
+            <img class="mx-auto my-8" src="../../src/assets/img/weather/404.png">
             <p class="text-center vingt-quatre-semi text-black pb-12">Le lieu est invalide</p>
             </div>
             <div class="px-16" v-show="!error404">
@@ -274,15 +274,15 @@ export default {
       //@ts-ignore
       switch (this.weatherData.weather[0].main) {
         case 'Clear':
-          return '/src/assets/img/weather/clear.png';
+          return '../../src/assets/img/weather/clear.png';
         case 'Rain':
-          return '/src/assets/img/weather/rain.png';
+          return '../../src/assets/img/weather/rain.png';
         case 'Snow':
-          return '/src/assets/img/weather/snow.png';
+          return '../../src/assets/img/weather/snow.png';
         case 'Clouds':
-          return '/src/assets/img/weather/cloud.png';
+          return '../../src/assets/img/weather/cloud.png';
         case 'Haze':
-          return '/src/assets/img/weather/mist.png';
+          return '../../src/assets/img/weather/mist.png';
         default:
           return '';
       }
